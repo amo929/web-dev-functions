@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Client Side Verification for Multiple Recaptchas</title>
+		<!-- YOU MUST INCLUDE THIS SCRIPT - YOU ARE FREE TO CHANGE 'captchaCallback' -->
+		<script src="https://www.google.com/recaptcha/api.js?onload=captchaCallback&render=explicit" async defer></script>
+	</head>
+
+	<body>
+		<form>
+			<div id="recaptcha-1" class="g-recaptcha"></div>
+			<div id="recaptcha-2" class="g-recaptcha"></div>
+			<div id="recaptcha-3" class="g-recaptcha"></div>
+
+			<input type="submit" name="submit" onclick="return validate();">
+		</form>
+
+		<script type="text/javascript">
+			var cap1, cap2, cap3;
+
+			var captchaCallback = function() {
+				cap1 = grecaptcha.render('recaptcha-1', {'sitekey' : 'YOUR SITE KEY GOES HERE'});
+				cap2 = grecaptcha.render('recaptcha-2', {'sitekey' : 'YOUR SITE KEY GOES HERE'});
+				cap3 = grecaptcha.render('recaptcha-3', {'sitekey' : 'YOUR SITE KEY GOES HERE'});
+			};
+
+			function validate() {
+				if(grecaptcha.getResponse(cap1).length === 0 || 
+					grecaptcha.getResponse(cap2).length === 0 || 
+					grecaptcha.getResponse(cap3).length === 0) {
+						alert("houston we have a problem");
+						return false;
+				}
+				else {
+					return true;
+				}
+			}
+		</script>
+	</body>
+</html>
+
+
