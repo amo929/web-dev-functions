@@ -39,5 +39,3 @@ function partition(arr, left, right) {
 	} 
 	return i;
 }
-
-console.log("abc" < "def");
